@@ -7,6 +7,29 @@ TEST(EchoTest, HelloWorld) {
 	EXPECT_EQ("hello world", echo(3,test_val));
 }
 
+TEST(EchoTest, EmptyString) {
+	char* test_val[1]; test_val[0] = "./c-echo";
+	EXPECT_EQ("", echo(1, test_val));
+}
+
+TEST(EchoTest, LotsOfValues) {
+	char* test_val[10]; test_val[0] = "./c-echo";
+	for (int i=1; i<10; i++) {
+		test_val[i] = "EXCELLENT";
+	}
+	EXPECT_EQ("EXCELLENT EXCELLENT EXCELLENT EXCELLENT EXCELLENT EXCELLENT EXCELLENT EXCELLENT EXCELLENT", echo(10, test_val));
+}
+
+TEST(EchoTest, Number) {
+	char* test_val[2]; test_val[0] = "./c-echo"; test_val[1] = "100";
+	EXPECT_EQ("100", echo(2,test_val));
+}
+
+TEST(EchoTest, LongValue) {
+	char* test_val[2]; test_val[0] = "./c-echo";test_val[1] = "EXCELLENTEXCELLENTEXCELLENTEXCELLENTEXCELLENT";
+	EXPECT_EQ("EXCELLENTEXCELLENTEXCELLENTEXCELLENTEXCELLENT", echo(2, test_val));
+}
+
 int main(int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
